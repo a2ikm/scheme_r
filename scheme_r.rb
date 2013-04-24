@@ -66,4 +66,7 @@ class SchemeR
       exp[2]
     ]
   end
+  def let?(exp)
+    exp[0] == :let
+  end
 end

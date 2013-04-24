@@ -42,4 +42,13 @@ describe SchemeR do
       [[:x, :y], [1, 2], [:+, :x, :y]]
     }
   end
+
+  describe "#let?" do
+    specify {
+      s.let?([:let, [[:x, 1]], [:lambda, [], :x]]).should be_true
+    }
+    specify {
+      s.let?([:lambda, [], :x]).should be_false
+    }
+  end
 end
