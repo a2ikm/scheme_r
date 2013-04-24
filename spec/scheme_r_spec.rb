@@ -19,4 +19,20 @@ describe SchemeR do
     specify { s.cdr([1, 2, 3]).should == [2, 3] }
     specify { s.cdr([7, 8, 9]).should == [8, 9] }
   end
+
+  describe "#lookup_var" do
+    specify {
+      env = [{ x: 1, y:2 }, { x: 3, y: 4 }]
+      s.lookup_var(:x, env).should == 1
+    }
+  end
+
+  describe "#extend_env" do
+    specify {
+      env = [{ x: 1, y: 2 }]
+      adding_vars = { x: 3, y: 4 }
+      s.extend_env(adding_vars.keys, adding_vars.values, env).should ==
+        [adding_vars, env].flatten
+    }
+  end
 end
