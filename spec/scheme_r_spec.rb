@@ -35,4 +35,11 @@ describe SchemeR do
         [adding_vars, env].flatten
     }
   end
+
+  describe "#extract_let_exp" do
+    specify {
+      s.extract_let_exp([:let, [[:x, 1], [:y, 2]], [:+, :x, :y]]).should ==
+      [[:x, :y], [1, 2], [:+, :x, :y]]
+    }
+  end
 end

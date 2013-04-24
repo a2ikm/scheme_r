@@ -54,4 +54,16 @@ class SchemeR
     vars = names.zip(values).inject({}) { |x, (n, v)| x[n] = v; x }
     [vars] + env
   end
+  def eval_let(exp, env)
+    names, values, body = extract_let_exp(exp)
+    new_exp = [[:lambda, names, body], *values]
+    _eval(new_exp, env)
+  end
+  def extract_let_exp(exp)
+    [
+      exp[1].map { |x| x[0] }, 
+      exp[1].map { |x| x[1] }, 
+      exp[2]
+    ]
+  end
 end
