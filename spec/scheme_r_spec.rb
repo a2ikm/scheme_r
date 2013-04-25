@@ -5,9 +5,20 @@ describe SchemeR do
   let(:s) { SchemeR.new }
 
   describe "#_eval" do
-    specify { s._eval(1).should == 1 }
-    specify { s._eval(:+).should == SchemeR::PRIMITIVE_FUN[:+] }
-    specify { s._eval([:+, 1, 3]).should == 4 }
+    specify { s._eval(1, $global_env).should == 1 }
+    specify { s._eval([:+, 1, 3], $global_env).should == 4 }
+    specify {
+      exp = [:lambda, [:x, :y], [:+, :x, :y]]
+      s._eval(exp, $global_env).should == [:closure, [:x, :y], [:+, :x, :y], $global_env]
+    }
+    specify {
+      exp = [[:lambda, [:x, :y], [:+, :x, :y]], 1, 2]
+      s._eval(exp, $global_env).should == 3
+    }
+    specify {
+      exp = [:let, [[:x, 1], [:y, 2]], [:+, :x, :y]]
+      s._eval(exp, $global_env).should == 3
+    }
   end
 
   describe "#car" do
