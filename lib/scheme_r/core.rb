@@ -36,13 +36,15 @@ module  Core
     [vars] + env
   end
   def special_form?(exp)
-    lambda?(exp) || let?(exp)
+    lambda?(exp) || let?(exp) || if?(exp)
   end
   def eval_special_form(exp, env)
     if lambda?(exp)
       eval_lambda(exp, env)
     elsif let?(exp)
       eval_let(exp, env)
+    elsif if?(exp)
+      eval_if(exp, env)
     end
   end
 end

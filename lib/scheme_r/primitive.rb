@@ -7,6 +7,12 @@ module Primitive
     :- => [:prim, lambda { |x, y| x - y }],
     :* => [:prim, lambda { |x, y| x * y }],
     :/ => [:prim, lambda { |x, y| x / y }],
+    
+    :>  => [:prim, lambda { |x, y| x >  y }], 
+    :>= => [:prim, lambda { |x, y| x >= y }], 
+    :== => [:prim, lambda { |x, y| x == y }], 
+    :<= => [:prim, lambda { |x, y| y <= y }], 
+    :<  => [:prim, lambda { |x, y| y <  y }], 
   }
   def primitive?(exp)
     exp[0] == :prim

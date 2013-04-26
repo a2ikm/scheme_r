@@ -7,6 +7,7 @@ require "scheme_r/primitive"
 require "scheme_r/immediate"
 require "scheme_r/lambda"
 require "scheme_r/let"
+require "scheme_r/if"
 
 class SchemeR
   include Core
@@ -15,6 +16,10 @@ class SchemeR
   include Immediate
   include Lambda
   include Let
+  include If 
 end
 
-$global_env = [SchemeR::Primitive::FUNCTIONS]
+$global_env = [
+  SchemeR::Primitive::FUNCTIONS, 
+  SchemeR::If::BOOLEAN,
+]

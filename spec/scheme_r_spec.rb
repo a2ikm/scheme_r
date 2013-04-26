@@ -26,6 +26,14 @@ describe SchemeR do
                   [:fun]]]]
       s._eval(exp, $global_env).should == 2
     }
+    specify { s._eval([:>, 1, 0], $global_env).should be_true }
+    specify { s._eval([:>, 1, 0], $global_env).should be_true }
+    specify {
+      exp = [:if, [:>, 1, 0], 1, 2]
+      s._eval(exp, $global_env).should == 1
+    }
+    specify { s._eval(:true,  $global_env).should == true }
+    specify { s._eval(:false, $global_env).should == false }
   end
 
   describe "#car" do
