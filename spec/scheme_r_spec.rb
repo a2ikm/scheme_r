@@ -19,6 +19,13 @@ describe SchemeR do
       exp = [:let, [[:x, 1], [:y, 2]], [:+, :x, :y]]
       s._eval(exp, $global_env).should == 3
     }
+    specify {
+      exp = [:let, [[:x,  2]], 
+              [:let, [[:fun, [:lambda, [], :x]]], 
+                [:let, [[:x, 1]], 
+                  [:fun]]]]
+      s._eval(exp, $global_env).should == 2
+    }
   end
 
   describe "#car" do
@@ -60,6 +67,26 @@ describe SchemeR do
     }
     specify {
       s.let?([:lambda, [], :x]).should be_false
+    }
+  end
+
+  describe "#eval_lambda" do
+    specify {
+      s.eval_lambda([:lambda, [:x, :y], :function], []).should ==
+        [:closure, [:x, :y], :function, []]
+    }
+  end
+
+  describe "#extract_closure_exp" do
+    specify {
+      s.extract_closure_exp([:closure, [:x, :y], :function, []]).should ==
+        [[:x, :y], :function, []]
+    }
+  end
+
+  describe "#apply_lambda" do
+    specify {
+      s.apply_lambda([:closure, [:x, :y], [:+, :x, :y], $global_env], [1, 2]).should == 3
     }
   end
 end
