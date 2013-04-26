@@ -8,6 +8,7 @@ require "scheme_r/immediate"
 require "scheme_r/lambda"
 require "scheme_r/let"
 require "scheme_r/if"
+require "scheme_r/letrec"
 
 class SchemeR
   include Core
@@ -17,6 +18,7 @@ class SchemeR
   include Lambda
   include Let
   include If 
+  include Letrec
 end
 
 $global_env = [

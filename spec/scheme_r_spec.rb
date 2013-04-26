@@ -34,6 +34,13 @@ describe SchemeR do
     }
     specify { s._eval(:true,  $global_env).should == true }
     specify { s._eval(:false, $global_env).should == false }
+    specify {
+      exp = [:letrec, 
+             [[:fact, 
+              [:lambda, [:n], [:if, [:<, :n, 1], 1, [:*, :n, [:fact, [:-, :n, 1]]]]]]], 
+             [:fact, 3]]
+      s._eval(exp, $global_env).should == 6
+    }
   end
 
   describe "#car" do
