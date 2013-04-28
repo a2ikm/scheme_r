@@ -4,6 +4,10 @@ require "spec_helper"
 describe SchemeR do
   let(:s) { SchemeR.new }
 
+  describe "#parse" do
+    specify { s.parse("(let (x 1) (+ x 2))").should == [:let, [:x, 1], [:+, :x, 2]] }
+  end
+
   describe "#_eval" do
     specify { s._eval(1, $global_env).should == 1 }
     specify { s._eval([:+, 1, 3], $global_env).should == 4 }
