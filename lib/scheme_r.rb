@@ -10,6 +10,7 @@ require "scheme_r/let"
 require "scheme_r/if"
 require "scheme_r/letrec"
 require "scheme_r/define"
+require "scheme_r/cond"
 
 class SchemeR
   include Core
@@ -21,6 +22,7 @@ class SchemeR
   include If 
   include Letrec
   include Define
+  include Cond
 end
 
 $global_env = [

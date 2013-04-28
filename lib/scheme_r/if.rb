@@ -1,4 +1,8 @@
 # coding: utf-8
+
+#
+#   [:if, [:>, :x, 1], 1, 0]
+#
 class SchemeR
 module If
   BOOLEAN = { true: true, false: false }

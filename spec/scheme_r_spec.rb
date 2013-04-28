@@ -50,6 +50,14 @@ describe SchemeR do
       s._eval(exp, $global_env)
       s._eval([:length, [:list, 1, 2, 3]], $global_env).should == 3
     }
+    specify {
+     exp = [:cond,
+            [[:>, 1, 1], 1],
+            [[:>, 2, 1], 2],
+            [[:>, 3, 1], 3],
+            [:else, -1]] 
+     s._eval(exp, $global_env).should == 2
+    }
   end
 
   describe "#car" do
