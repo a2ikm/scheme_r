@@ -31,6 +31,9 @@ module  Core
     raise "couldn't find value to variable: #{name}" if vars.nil?
     vars[name]
   end
+  def lookup_var_ref(name, env)
+    env.find { |vars| vars.has_key?(name) }
+  end
   def extend_env(names, values, env)
     vars = names.zip(values).inject({}) { |x, (n, v)| x[n] = v; x }
     [vars] + env
@@ -42,7 +45,7 @@ module  Core
     env
   end
   def special_form?(exp)
-    lambda?(exp) || let?(exp) || letrec?(exp) || if?(exp)
+    lambda?(exp) || let?(exp) || letrec?(exp) || if?(exp) || define?(exp)
   end
   def eval_special_form(exp, env)
     if lambda?(exp)
@@ -53,6 +56,8 @@ module  Core
       eval_letrec(exp, env)
     elsif if?(exp)
       eval_if(exp, env)
+    elsif define?(exp)
+      eval_define(exp, env)
     end
   end
 end

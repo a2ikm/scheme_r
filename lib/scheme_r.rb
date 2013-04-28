@@ -9,6 +9,7 @@ require "scheme_r/lambda"
 require "scheme_r/let"
 require "scheme_r/if"
 require "scheme_r/letrec"
+require "scheme_r/define"
 
 class SchemeR
   include Core
@@ -19,9 +20,11 @@ class SchemeR
   include Let
   include If 
   include Letrec
+  include Define
 end
 
 $global_env = [
+  {}, # user defined space
   SchemeR::List::FUNCTIONS, 
   SchemeR::Primitive::FUNCTIONS, 
   SchemeR::If::BOOLEAN,
