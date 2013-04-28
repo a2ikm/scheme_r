@@ -29,7 +29,7 @@ module  Core
   def lookup_var(name, env)
     vars = env.find { |vars| vars.has_key?(name) }
     raise "couldn't find value to variable: #{name}" if vars.nil?
-    vars[name].tap{|x| p "#{name} = #{x}" }
+    vars[name]
   end
   def extend_env(names, values, env)
     vars = names.zip(values).inject({}) { |x, (n, v)| x[n] = v; x }
