@@ -45,7 +45,7 @@ module  Core
     env
   end
   def special_form?(exp)
-    lambda?(exp) || let?(exp) || letrec?(exp) || if?(exp) || define?(exp) || cond?(exp)
+    lambda?(exp) || let?(exp) || letrec?(exp) || if?(exp) || define?(exp) || cond?(exp) || quote?(exp)
   end
   def eval_special_form(exp, env)
     if lambda?(exp)
@@ -60,6 +60,8 @@ module  Core
       eval_define(exp, env)
     elsif cond?(exp)
       eval_cond(exp, env)
+    elsif quote?(exp)
+      eval_quote(exp, env)
     end
   end
 end

@@ -6,6 +6,8 @@ describe SchemeR do
 
   describe "#parse" do
     specify { s.parse("(let (x 1) (+ x 2))").should == [:let, [:x, 1], [:+, :x, 2]] }
+    specify { s.parse("'(+ 1 2)").should == [:quote, [:+, 1, 2]] }
+    specify { s.parse("'(+ (+ 1 2) 3)").should == [:quote, [:+, [:+, 1, 2], 3]] }
   end
 
   describe "#_eval" do
@@ -61,6 +63,9 @@ describe SchemeR do
             [[:>, 3, 1], 3],
             [:else, -1]] 
      s._eval(exp, $global_env).should == 2
+    }
+    specify {
+      s._eval([:quote, [:+, 1, 2]], $global_env).should == [:+, 1, 2]
     }
   end
 
