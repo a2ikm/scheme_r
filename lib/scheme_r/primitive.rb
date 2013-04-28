@@ -18,7 +18,9 @@ module Primitive
     exp[0] == :prim
   end
   def apply_primitive(fun, args)
-    fun[1].call(*args)
+    # consといったメソッドはインスタンスメソッドとして定義されているので、
+    # ブロックはインスタンスのスコープで評価しなければならない
+    instance_exec(*args, &fun[1])
   end
 end
 end

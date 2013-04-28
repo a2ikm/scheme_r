@@ -104,4 +104,25 @@ describe SchemeR do
       s.apply_lambda([:closure, [:x, :y], [:+, :x, :y], $global_env], [1, 2]).should == 3
     }
   end
+
+  describe "#list" do
+    specify { s._eval([:list, 1, 2, 3], $global_env).should == [1, 2, 3] }
+  end
+
+  describe "#null?" do
+    specify { s._eval([:null?, [:list]], $global_env).should be_true }
+    specify { s._eval([:null?, [:list, 1]], $global_env).should be_false }
+  end
+
+  describe "#car" do
+    specify { s._eval([:car, [:list, 1, 2]], $global_env).should == 1 }
+  end
+
+  describe "#cdr" do
+    specify { s._eval([:cdr, [:list, 1, 2]], $global_env).should == [2] }
+  end
+
+  describe "#cons" do
+    specify { s._eval([:cons, 1, [:list, 2]], $global_env).should == [1, 2] }
+  end
 end

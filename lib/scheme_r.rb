@@ -22,6 +22,7 @@ class SchemeR
 end
 
 $global_env = [
+  SchemeR::List::FUNCTIONS, 
   SchemeR::Primitive::FUNCTIONS, 
   SchemeR::If::BOOLEAN,
 ]
