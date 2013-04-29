@@ -13,11 +13,9 @@ class REPL
   end
   def start
     loop do
-      prompt
-      line = gets or return
+      line = prompt or return
       while line.count("(") > line.count(")")
-        prompt2
-        next_line = gets or return
+        next_line = prompt2 or return
         line += next_line
       end
       redo if line =~ /\A\s*\z/m
@@ -35,10 +33,12 @@ class REPL
 
   def prompt
     print ">>> "
+    gets
   end
 
   def prompt2
     print ">>  "
+    gets
   end
 end
 end
