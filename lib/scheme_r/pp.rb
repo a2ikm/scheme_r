@@ -6,7 +6,7 @@
 class SchemeR
 module PP
   def _pp(exp)
-    if exp.is_a?(Symbol) || num?(exp)
+    if exp.is_a?(Symbol) || numeric?(exp)
       exp.to_s
     elsif exp.nil?
       ""
