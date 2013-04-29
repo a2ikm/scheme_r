@@ -34,11 +34,15 @@ class REPL
   def prompt
     print ">>> "
     gets
+  rescue Interrupt
+    exit
   end
 
   def prompt2
     print ">>  "
     gets
+  rescue Interrupt
+    exit
   end
 end
 end
