@@ -15,6 +15,7 @@ require "scheme_r/parse"
 require "scheme_r/quote"
 require "scheme_r/closure"
 require "scheme_r/pp"
+require "scheme_r/setq"
 
 class SchemeR
   include Core
@@ -31,6 +32,7 @@ class SchemeR
   include Quote
   include Closure
   include PP 
+  include Setq
 end
 
 $global_env = [
