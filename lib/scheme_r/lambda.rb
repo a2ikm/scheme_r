@@ -18,9 +18,9 @@ module Lambda
   #   [:closure, [:x, :y], function, env]
   #
   def eval_lambda(exp, env)
-    make_closure(exp, env)
+    make_closure_from_lambda(exp, env)
   end
-  def make_closure(exp, env)
+  def make_closure_from_lambda(exp, env)
     names, body = exp[1, 2]
     [:closure, names, body, env]
   end
