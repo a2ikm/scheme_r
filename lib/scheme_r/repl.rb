@@ -25,7 +25,7 @@ class REPL
         puts "#{e.class} : #{e.message}"
         redo
       end
-      puts val
+      puts @s._pp(val)
     end
   end
 
