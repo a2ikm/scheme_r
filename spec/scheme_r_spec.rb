@@ -8,6 +8,9 @@ describe SchemeR do
     specify { s.parse("(let (x 1) (+ x 2))").should == [:let, [:x, 1], [:+, :x, 2]] }
     specify { s.parse("'(+ 1 2)").should == [:quote, [:+, 1, 2]] }
     specify { s.parse("'(+ (+ 1 2) 3)").should == [:quote, [:+, [:+, 1, 2], 3]] }
+    specify { s.parse("(foo)").should == [:foo] }
+    specify { s.parse("'foo").should == SchemeR::Symbol.new(:foo) }
+    specify { s.parse("('foo)").should == [SchemeR::Symbol.new(:foo)] }
   end
 
   describe "#_eval" do
