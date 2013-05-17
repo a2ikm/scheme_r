@@ -14,6 +14,11 @@ class REPL
   def start
     loop do
       line = prompt or return
+
+      exit if line.strip == "quit"
+      exit if line.strip == "exit"
+      help or next if line.strip == "help"
+
       while line.count("(") > line.count(")")
         next_line = prompt2 or return
         line += next_line
@@ -43,6 +48,12 @@ class REPL
     gets
   rescue Interrupt
     exit
+  end
+
+  def help
+    puts "Type `quit` or `exit` to exit repl."
+    puts "Type `help` to display this help message."
+    puts
   end
 end
 end
