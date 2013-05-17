@@ -13,17 +13,23 @@ class REPL
   end
   def start
     loop do
-      line = prompt or return
+      begin
+        line = prompt or return
 
-      exit if line.strip == "quit"
-      exit if line.strip == "exit"
-      help or next if line.strip == "help"
+        exit if line.strip == "quit"
+        exit if line.strip == "exit"
+        help or next if line.strip == "help"
 
-      while line.count("(") > line.count(")")
-        next_line = prompt2 or return
-        line += next_line
+        while line.count("(") > line.count(")")
+          next_line = prompt2 or return
+          line += next_line
+        end
+        redo if line =~ /\A\s*\z/m
+      rescue Interrupt
+        puts
+        next
       end
-      redo if line =~ /\A\s*\z/m
+
       begin
         val = @s._eval(@s.parse(line), @env)
         puts @s._pp(val)
@@ -39,15 +45,11 @@ class REPL
   def prompt
     print ">>> "
     gets
-  rescue Interrupt
-    exit
   end
 
   def prompt2
     print ">>  "
     gets
-  rescue Interrupt
-    exit
   end
 
   def help
