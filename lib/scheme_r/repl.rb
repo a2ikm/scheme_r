@@ -26,11 +26,11 @@ class REPL
       redo if line =~ /\A\s*\z/m
       begin
         val = @s._eval(@s.parse(line), @env)
+        puts @s._pp(val)
       rescue Exception => e
         puts "#{e.class} : #{e.message}"
         redo
       end
-      puts @s._pp(val)
     end
   end
 
